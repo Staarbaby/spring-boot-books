@@ -31,6 +31,6 @@ public class BookService {
     }
 
     public Optional<BookEntity> byId(Integer id){
-        return bookStorage.stream().filter(bookEntity -> false).findFirst();
+        return bookStorage.stream().filter((bookEntity -> bookEntity.getId() == id)).findFirst();
     }
 }
