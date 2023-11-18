@@ -42,4 +42,15 @@ public class BookService {
         bookStorage.add(book);
         return book;
     }
+
+    public Optional<BookEntity> edit(BookEntity book){
+        Optional<BookEntity> bookEntityOptional = byId(book.getId());
+        if(bookEntityOptional.isEmpty())
+            return Optional.empty();
+
+        BookEntity oldBook = bookEntityOptional.get();
+        oldBook.setDescription(book.getDescription());
+        oldBook.setTitle(book.getTitle());
+        return Optional.of(book);
+    }
 }
