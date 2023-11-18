@@ -5,6 +5,7 @@ import com.campus.spring.book.service.BookService;
 import org.springframework.web.bind.annotation.*;
 import com.campus.spring.base.exeption.ResourceNotFoundException;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class BookApiController {
@@ -39,9 +40,17 @@ public class BookApiController {
         return bookService.edit(book).orElseThrow(ResourceNotFoundException::new);
     }
 
+    @PatchMapping("/api/v1/book/{id}")
+    public BookEntity edit(@PathVariable Integer id, @RequestBody Map<String, String> fields){
+        return bookService.editPart(id, fields).orElseThrow(ResourceNotFoundException::new);
+    }
+
+
     @DeleteMapping("/api/v1/book/{id}")
     public Boolean delete(@PathVariable Integer id) {
         return bookService.delete(id);
     }
+
+
 }
 
